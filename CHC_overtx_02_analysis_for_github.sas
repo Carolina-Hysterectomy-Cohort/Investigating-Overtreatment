@@ -545,3 +545,423 @@ estimate 'RR Hispanic vs. White' Race_six_level 0 1 -1/ exp cl;
 
 run;
 title;
+
+
+/***Supplemental Analysis: Regressions restricted to certain clinical conditions of interest***/
+
+
+title "Appendix 2. Bulk Score - including all covariates w random intercept fibroids-restricted";
+proc glimmix data= race_rest_fib method= laplace;
+class CDWH_HOSP_ID (ref= "Academic Location") SHEPSID Race_six_level (ref="White") BMI_CAT (ref= ">25.0 to <=30.0") prev_laparotomy (ref= "0") 
+Cervdysplasia(ref="0") OVCYSTPELVMASS(ref="0");
+
+model BULK_scoretop25 (event="1") = Race_six_level 
+									r_age_hyst
+									BMI_CAT 
+									w_cci
+									prev_laparotomy
+									count_prior_treat
+									CDWH_HOSP_ID
+									Cervdysplasia OVCYSTPELVMASS
+									 
+									/cl dist=poisson link=log solution;
+random intercept / subject =SHEPSID type=cs solution cl;
+estimate 'RR Black vs. White' Race_six_level 1 0 -1/ exp cl;
+estimate 'RR Hispanic vs. White' Race_six_level 0 1 -1/ exp cl;
+title;
+run;
+
+
+title "Appendix 2. Bleed Score - including all covariates w random intercept fibroids-restricted";
+proc glimmix data= race_rest_fib method= laplace;
+class CDWH_HOSP_ID (ref= "Academic Location") SHEPSID Race_six_level (ref="White") BMI_CAT (ref= ">25.0 to <=30.0") prev_laparotomy (ref= "0") 
+Cervdysplasia(ref="0") OVCYSTPELVMASS(ref="0");
+
+model BLEED_scoretop25 (event="1") = Race_six_level 
+									r_age_hyst
+									BMI_CAT 
+									w_cci
+									prev_laparotomy
+									count_prior_treat
+									CDWH_HOSP_ID
+									Cervdysplasia OVCYSTPELVMASS
+									 
+									/cl dist=poisson link=log solution;
+random intercept / subject =SHEPSID type=cs solution cl;
+
+estimate 'RR Black vs. White' Race_six_level 1 0 -1/ exp cl;
+estimate 'RR Hispanic vs. White' Race_six_level 0 1 -1/ exp cl;
+title;
+run;
+
+
+title "Appendix 2. Bleed Score - including all covariates w random intercept AUBMeno-restricted";
+proc glimmix data= race_rest_MENOR_AUB method= laplace;
+class CDWH_HOSP_ID (ref= "Academic Location") SHEPSID Race_six_level (ref="White") BMI_CAT (ref= ">25.0 to <=30.0") prev_laparotomy (ref= "0") 
+Cervdysplasia(ref="0") OVCYSTPELVMASS(ref="0");
+
+model BLEED_scoretop25 (event="1") = Race_six_level 
+									r_age_hyst
+									BMI_CAT 
+									w_cci
+									prev_laparotomy
+								count_prior_treat
+									/*R_PREGHX_DELIV_COUNT*/
+									CDWH_HOSP_ID
+									/*Fibroids Chronicpelvpain Endometriosis MENOR_AUB*/
+									Cervdysplasia OVCYSTPELVMASS
+									 
+									/cl dist=poisson link=log solution;
+random intercept / subject =SHEPSID type=cs solution cl;
+
+estimate 'RR Black vs. White' Race_six_level 1 0 -1/ exp cl;
+estimate 'RR Hispanic vs. White' Race_six_level 0 1 -1/ exp cl;
+
+run;
+title;
+
+title "Appendix 2 Pain Score - including all covariates w random intercept chronic pelvic pain-restricted";
+proc glimmix data= race_rest_CPP method= laplace;
+class CDWH_HOSP_ID (ref= "Academic Location") SHEPSID Race_six_level (ref="White") BMI_CAT (ref= ">25.0 to <=30.0") prev_laparotomy (ref= "0") 
+Cervdysplasia(ref="0") OVCYSTPELVMASS(ref="0");
+
+model PAIN_scoretop25 (event="1") = Race_six_level 
+									r_age_hyst
+									BMI_CAT 
+									w_cci
+									prev_laparotomy
+									count_prior_treat
+									CDWH_HOSP_ID
+									Cervdysplasia OVCYSTPELVMASS
+									 
+									/cl dist=poisson link=log solution;
+random intercept / subject =SHEPSID type=cs solution cl;
+
+estimate 'RR Black vs. White' Race_six_level 1 0 -1/ exp cl;
+estimate 'RR Hispanic vs. White' Race_six_level 0 1 -1/ exp cl;
+run;
+title;
+
+
+title "Appendix 2 Pain Score - including all covariates w random intercept endometriosis-restricted";
+proc glimmix data= race_rest_endo method= laplace;
+class CDWH_HOSP_ID (ref= "Academic Location") SHEPSID Race_six_level (ref="White") BMI_CAT (ref= ">25.0 to <=30.0") prev_laparotomy (ref= "0") 
+Cervdysplasia(ref="0") OVCYSTPELVMASS(ref="0");
+
+model PAIN_scoretop25 (event="1") = Race_six_level 
+									r_age_hyst
+									BMI_CAT 
+									w_cci
+									prev_laparotomy
+									count_prior_treat
+									CDWH_HOSP_ID
+									Cervdysplasia OVCYSTPELVMASS
+									 
+									/cl dist=poisson link=log solution;
+random intercept / subject =SHEPSID type=cs solution cl;
+
+
+estimate 'RR Black vs. White' Race_six_level 1 0 -1/ exp cl;
+estimate 'RR Hispanic vs. White' Race_six_level 0 1 -1/ exp cl;
+title;
+
+/***Supplemental analyses: Regressions including the number of deliveries as a covariate***/
+
+title "Appendix 3. Bulk Score - all covariates including num of del w random intercept";
+proc glimmix data= race_rest method= laplace;
+class CDWH_HOSP_ID (ref= "Academic Location") SHEPSID Race_six_level (ref="White") BMI_CAT (ref= ">25.0 to <=30.0") prev_laparotomy (ref= "0") 
+Cervdysplasia(ref="0") OVCYSTPELVMASS(ref="0");
+
+model BULK_scoretop25 (event="1") = Race_six_level 
+									r_age_hyst
+									BMI_CAT 
+									w_cci
+									prev_laparotomy
+									count_prior_treat
+									R_PREGHX_DELIV_COUNT
+									CDWH_HOSP_ID
+									Cervdysplasia OVCYSTPELVMASS
+									 
+									/cl dist=poisson link=log solution;
+random intercept / subject =SHEPSID type=cs solution cl;
+
+
+estimate 'RR Black vs. White' Race_six_level 1 0 -1/ exp cl;
+estimate 'RR Hispanic vs. White' Race_six_level 0 1 -1/ exp cl;
+run;
+title;
+
+
+title "Appendix 3 Bleed Score - all covariates including num of del w random intercept";
+proc glimmix data= race_rest method= laplace;
+class CDWH_HOSP_ID (ref= "Academic Location") SHEPSID Race_six_level (ref="White") BMI_CAT (ref= ">25.0 to <=30.0") prev_laparotomy (ref= "0") 
+Cervdysplasia(ref="0") OVCYSTPELVMASS(ref="0");
+
+model BLEED_scoretop25 (event="1") = Race_six_level 
+									r_age_hyst
+									BMI_CAT 
+									w_cci
+									prev_laparotomy
+									count_prior_treat
+									R_PREGHX_DELIV_COUNT
+									CDWH_HOSP_ID
+									Cervdysplasia OVCYSTPELVMASS
+									 
+									/cl dist=poisson link=log solution;
+random intercept / subject =SHEPSID type=cs solution cl;
+
+estimate 'RR Black vs. White' Race_six_level 1 0 -1/ exp cl;
+estimate 'RR Hispanic vs. White' Race_six_level 0 1 -1/ exp cl;
+
+
+run;
+title;
+
+
+title "Appendix 3 Pain Score - all covariates including num of del w random intercept";
+proc glimmix data= race_rest method= laplace;
+class CDWH_HOSP_ID (ref= "Academic Location") SHEPSID Race_six_level (ref="White") BMI_CAT (ref= ">25.0 to <=30.0") prev_laparotomy (ref= "0") 
+Cervdysplasia(ref="0") OVCYSTPELVMASS(ref="0");
+
+model PAIN_scoretop25 (event="1") = Race_six_level 
+									r_age_hyst
+									BMI_CAT 
+									w_cci
+									prev_laparotomy
+									count_prior_treat
+									R_PREGHX_DELIV_COUNT
+									CDWH_HOSP_ID
+									Cervdysplasia OVCYSTPELVMASS
+									 
+									/cl dist=poisson link=log solution;
+random intercept / subject =SHEPSID type=cs solution cl;
+
+estimate 'RR Black vs. White' Race_six_level 1 0 -1/ exp cl;
+estimate 'RR Hispanic vs. White' Race_six_level 0 1 -1/ exp cl;
+
+run;
+title;
+
+
+/* Appendix 4 and 5: fully-adjusted multivariable regression models including ovarian cyst/pelvic mass,cervical dysplasia and race/ethncity interaction term*/
+
+title "Appendix 4 and 5: Bulk Score - including all covariates, interactions w random intercept";
+proc glimmix data= race_rest method= laplace;
+class CDWH_HOSP_ID (ref= "Academic Location") SHEPSID Race_six_level (ref="White") BMI_CAT (ref= ">25.0 to <=30.0") prev_laparotomy (ref= "0") 
+Cervdysplasia(ref="0") OVCYSTPELVMASS(ref="0");
+
+model BULK_scoretop25 (event="1") = Race_six_level 
+									r_age_hyst
+									BMI_CAT 
+									w_cci
+									prev_laparotomy
+									count_prior_treat
+									CDWH_HOSP_ID
+									Cervdysplasia OVCYSTPELVMASS
+									Race_six_level*Cervdysplasia 
+									Race_six_level*OVCYSTPELVMASS
+									 
+									/cl dist=poisson link=log solution;
+random intercept / subject =SHEPSID type=cs solution cl;
+
+/*******Appendix 4 *********/
+/*Estimating Realtive Risk for 0 to 1 OVCYSTPELVMASS for White Women*/
+estimate 'White Women - 1 vs 0 OVCYSTPELVMASS'  OVCYSTPELVMASS 1 -1 Race_six_level*OVCYSTPELVMASS 0 0 0 0 1 -1  / /*e*/ exp cl;
+/*Ovarian cyst Estimating Relative Risk for 0 to 1 OVCYSTPELVMASS for Black Women*/
+estimate 'Black Women - 1 vs 0 OVCYSTPELVMASS'  OVCYSTPELVMASS 1 -1 Race_six_level*OVCYSTPELVMASS 1 -1 0 0 0 0 / /*e*/ exp cl;
+/*Estimating Realtive Risk for 0 to 1 OVCYSTPELVMASS for Hispanic*/
+estimate 'Hispanic Women - 1 vs 0 OVCYSTPELVMASS'  OVCYSTPELVMASS 1 -1 Race_six_level*OVCYSTPELVMASS  0 0 1 -1 0 0 / /*e*/ exp cl;
+
+/*******Appendix 5 *********/
+/*Estimating Realtive Risk for 0 to 1 dysplasia for White Women*/
+estimate 'White Women - 1 vs 0 dysplasia'  Cervdysplasia 1 -1 Race_six_level*Cervdysplasia 0 0 0 0 1 -1  / /*e*/ exp cl;
+/*Dysplasia Estimating Relative Risk for 0 to 1 dysplasia for Black Women*/
+estimate 'Black Women - 1 vs 0 dysplasia'  Cervdysplasia 1 -1 Race_six_level*Cervdysplasia 1 -1 0 0 0 0 / /*e*/ exp cl;
+/*Estimating Realtive Risk for 0 to 1 dysplasia for Hispanic*/
+estimate 'Hispanic Women - 1 vs 0 dysplasia'  Cervdysplasia 1 -1 Race_six_level*Cervdysplasia  0 0 1 -1 0 0 / /*e*/ exp cl;
+
+run;
+title;
+
+
+
+title "Appendix 4 and 5: Bleed Score - including all covariates, interactions w random intercept";
+proc glimmix data= race_rest method= laplace;
+class CDWH_HOSP_ID (ref= "Academic Location") SHEPSID Race_six_level (ref="White") BMI_CAT (ref= ">25.0 to <=30.0") prev_laparotomy (ref= "0") 
+Cervdysplasia(ref="0") OVCYSTPELVMASS(ref="0");
+
+model Bleed_scoretop25 (event="1") = Race_six_level 
+									r_age_hyst
+									BMI_CAT 
+									w_cci
+									prev_laparotomy
+									count_prior_treat
+									CDWH_HOSP_ID
+									Cervdysplasia OVCYSTPELVMASS
+									Race_six_level*Cervdysplasia 
+									Race_six_level*OVCYSTPELVMASS
+									 
+									/cl dist=poisson link=log solution;
+random intercept / subject =SHEPSID type=cs solution cl;
+
+
+/******* Appendix 4 *******/
+
+/*Estimating Realtive Risk for 0 to 1 OVCYSTPELVMASS for White Women*/
+estimate 'White Women - 1 vs 0 OVCYSTPELVMASS'  OVCYSTPELVMASS 1 -1 Race_six_level*OVCYSTPELVMASS 0 0 0 0 1 -1  / /*e*/ exp cl;
+/*Ovarian cyst Estimating Relative Risk for 0 to 1 OVCYSTPELVMASS for Black Women*/
+estimate 'Black Women - 1 vs 0 OVCYSTPELVMASS'  OVCYSTPELVMASS 1 -1 Race_six_level*OVCYSTPELVMASS 1 -1 0 0 0 0 / /*e*/ exp cl;
+/*Estimating Realtive Risk for 0 to 1 OVCYSTPELVMASS for Hispanic*/
+estimate 'Hispanic Women - 1 vs 0 OVCYSTPELVMASS'  OVCYSTPELVMASS 1 -1 Race_six_level*OVCYSTPELVMASS  0 0 1 -1 0 0 / /*e*/ exp cl;
+
+/******* Appendix 5 ******/
+/*Estimating Realtive Risk for 0 to 1 dysplasia for White Women*/
+estimate 'White Women - 1 vs 0 dysplasia'  Cervdysplasia 1 -1 Race_six_level*Cervdysplasia 0 0 0 0 1 -1  / /*e*/ exp cl;
+/*Dysplasia Estimating Relative Risk for 0 to 1 dysplasia for Black Women*/
+estimate 'Black Women - 1 vs 0 dysplasia'  Cervdysplasia 1 -1 Race_six_level*Cervdysplasia 1 -1 0 0 0 0 / /*e*/ exp cl;
+/*Estimating Realtive Risk for 0 to 1 dysplasia for Hispanic*/
+estimate 'Hispanic Women - 1 vs 0 dysplasia'  Cervdysplasia 1 -1 Race_six_level*Cervdysplasia  0 0 1 -1 0 0 / /*e*/ exp cl;
+
+run;
+title;
+
+
+title "Appendix 4 and 5: Pain Score - including all covariates, interactions w random intercept";
+proc glimmix data= race_rest method= laplace;
+class CDWH_HOSP_ID (ref= "Academic Location") SHEPSID Race_six_level (ref="White") BMI_CAT (ref= ">25.0 to <=30.0") prev_laparotomy (ref= "0") 
+Cervdysplasia(ref="0") OVCYSTPELVMASS(ref="0");
+
+model PAIN_scoretop25 (event="1") = Race_six_level 
+									r_age_hyst
+									BMI_CAT 
+									w_cci
+									prev_laparotomy
+									count_prior_treat
+									CDWH_HOSP_ID
+									Cervdysplasia OVCYSTPELVMASS
+									Race_six_level*Cervdysplasia 
+									Race_six_level*OVCYSTPELVMASS
+									 
+									/cl dist=poisson link=log solution;
+random intercept / subject =SHEPSID type=cs solution cl;
+
+/******* Appendix 4 *******/
+/*Estimating Realtive Risk for 0 to 1 OVCYSTPELVMASS for White Women*/
+estimate 'White Women - 1 vs 0 OVCYSTPELVMASS'  OVCYSTPELVMASS 1 -1 Race_six_level*OVCYSTPELVMASS 0 0 0 0 1 -1  / /*e*/ exp cl;
+/*Ovarian cyst Estimating Relative Risk for 0 to 1 OVCYSTPELVMASS for Black Women*/
+estimate 'Black Women - 1 vs 0 OVCYSTPELVMASS'  OVCYSTPELVMASS 1 -1 Race_six_level*OVCYSTPELVMASS 1 -1 0 0 0 0 / /*e*/ exp cl;
+/*Estimating Realtive Risk for 0 to 1 OVCYSTPELVMASS for Hispanic*/
+estimate 'Hispanic Women - 1 vs 0 OVCYSTPELVMASS'  OVCYSTPELVMASS 1 -1 Race_six_level*OVCYSTPELVMASS  0 0 1 -1 0 0 / /*e*/ exp cl;
+
+/******* Appendix 5 ******/
+/*Estimating Realtive Risk for 0 to 1 dysplasia for White Women*/
+estimate 'White Women - 1 vs 0 dysplasia'  Cervdysplasia 1 -1 Race_six_level*Cervdysplasia 0 0 0 0 1 -1  / /*e*/ exp cl;
+/*Dysplasia Estimating Relative Risk for 0 to 1 dysplasia for Black Women*/
+estimate 'Black Women - 1 vs 0 dysplasia'  Cervdysplasia 1 -1 Race_six_level*Cervdysplasia 1 -1 0 0 0 0 / /*e*/ exp cl;
+/*Estimating Realtive Risk for 0 to 1 dysplasia for Hispanic*/
+estimate 'Hispanic Women - 1 vs 0 dysplasia'  Cervdysplasia 1 -1 Race_six_level*Cervdysplasia  0 0 1 -1 0 0 / /*e*/ exp cl;
+
+run;
+title;
+
+
+/*Appendix 6 -Fully adjusted multivariable regression models including prior gynecological treatments and race/ethnicity interaction term*/
+
+title "Appendix 6: Bulk Score - multivariable adjusted by race categorized prior tx count interaction";
+proc glimmix data= race_rest method= laplace;
+class CDWH_HOSP_ID (ref= "Academic Location") SHEPSID Race_six_level (ref="White") 
+	BMI_CAT (ref= ">25.0 to <=30.0") prev_laparotomy (ref= "0")  prior_tx_cat(ref="0")
+Cervdysplasia(ref="0") OVCYSTPELVMASS(ref="0") ;
+
+model bulk_scoretop25 (event="1") = Race_six_level 
+									r_age_hyst
+									BMI_CAT 
+									w_cci
+									prev_laparotomy
+									prior_tx_cat
+									CDWH_HOSP_ID
+									Cervdysplasia OVCYSTPELVMASS
+									Race_six_level*prior_tx_cat
+									
+									/cl dist=poisson link=log solution;
+
+/*Estimating Relative Risk for 0 to 1 Treatment for Black Women*/
+estimate 'Black Women - 1 vs 0 Treatment'  prior_tx_cat 1 0 -1 Race_six_level*prior_tx_cat 1 0 -1 0 0 0 0 0 0 / /*e*/ exp ;
+estimate 'Black Women - 2 vs 0 Treatment'  prior_tx_cat 0 1 -1 Race_six_level*prior_tx_cat 0 1 -1 0 0 0 0 0 0 / /*e*/ exp;
+/*Estimating Realtive Risk for 0 to 2 Treatments for White Women*/
+estimate 'White Women - 1 vs 0 Treatment'  prior_tx_cat 1 0 -1 Race_six_level*prior_tx_cat 0 0 0 0 0 0 1 0 -1  / /*e*/ exp;
+estimate 'White Women - 2 vs 0 Treatment'  prior_tx_cat 0 1 -1 Race_six_level*prior_tx_cat 0 0 0 0 0 0 0 1 -1  / /*e*/ exp;
+/*Estimating Realtive Risk for 0 to 2 Treatments for Hispanic*/
+estimate 'Hispanic Women - 1 vs 0 Treatment'  prior_tx_cat 1 0 -1 Race_six_level*prior_tx_cat 0 0 0 1 0 -1  0 0 0 / /*e*/ exp;
+estimate 'Hispanic Women - 2 vs 0 Treatment'  prior_tx_cat 0 1 -1 Race_six_level*prior_tx_cat 0 0 0 0 1 -1  0 0 0 / /*e*/ exp;
+random intercept / subject =SHEPSID type=cs;
+run;
+title;
+
+
+title "Appendix 6: Bleeding Score - multivariable adjusted by race categorized prior tx count interaction";
+proc glimmix data= race_rest method= laplace;
+class CDWH_HOSP_ID (ref= "Academic Location") SHEPSID Race_six_level (ref="White") 
+	BMI_CAT (ref= ">25.0 to <=30.0") prev_laparotomy (ref= "0")  prior_tx_cat(ref="0")
+Cervdysplasia(ref="0") OVCYSTPELVMASS(ref="0");
+
+model bleed_scoretop25 (event="1") = Race_six_level 
+									r_age_hyst
+									BMI_CAT 
+									w_cci
+									prev_laparotomy
+									prior_tx_cat
+									CDWH_HOSP_ID
+									Cervdysplasia OVCYSTPELVMASS
+									Race_six_level*prior_tx_cat
+									
+									/cl dist=poisson link=log solution;
+
+
+/*Estimating Relative Risk for 0 to 1 Treatment for Black Women*/
+estimate 'Black Women - 1 vs 0 Treatment'  prior_tx_cat 1 0 -1 Race_six_level*prior_tx_cat 1 0 -1 0 0 0 0 0 0 / /*e*/ exp;
+estimate 'Black Women - 2 vs 0 Treatment'  prior_tx_cat 0 1 -1 Race_six_level*prior_tx_cat 0 1 -1 0 0 0 0 0 0 / /*e*/ exp;
+/*Estimating Realtive Risk for 0 to 2 Treatments for White Women*/
+estimate 'White Women - 1 vs 0 Treatment'  prior_tx_cat 1 0 -1 Race_six_level*prior_tx_cat 0 0 0 0 0 0 1 0 -1  / /*e*/ exp;
+estimate 'White Women - 2 vs 0 Treatment'  prior_tx_cat 0 1 -1 Race_six_level*prior_tx_cat 0 0 0 0 0 0 0 1 -1  / /*e*/ exp;
+/*Estimating Realtive Risk for 0 to 2 Treatments for Hispanic*/
+estimate 'Hispanic Women - 1 vs 0 Treatment'  prior_tx_cat 1 0 -1 Race_six_level*prior_tx_cat 0 0 0 1 0 -1  0 0 0 / /*e*/ exp;
+estimate 'Hispanic Women - 2 vs 0 Treatment'  prior_tx_cat 0 1 -1 Race_six_level*prior_tx_cat 0 0 0 0 1 -1  0 0 0 / /*e*/ exp;
+random intercept / subject =SHEPSID type=cs;
+run;
+title;
+
+
+
+title "Appendix 6:  Pain Score - multivariable adjusted by race categorized prior tx count interaction";
+proc glimmix data= race_rest method= laplace;
+class CDWH_HOSP_ID (ref= "Academic Location") SHEPSID Race_six_level (ref="White") 
+	BMI_CAT (ref= ">25.0 to <=30.0") prev_laparotomy (ref= "0")  prior_tx_cat(ref="0")
+Cervdysplasia(ref="0") OVCYSTPELVMASS(ref="0") /*prior_tx_cat (ref="0")*/;
+
+model pain_scoretop25 (event="1") = Race_six_level 
+									r_age_hyst
+									BMI_CAT 
+									w_cci
+									prev_laparotomy
+									prior_tx_cat
+									CDWH_HOSP_ID
+									Cervdysplasia OVCYSTPELVMASS
+									Race_six_level*prior_tx_cat
+									
+									/cl dist=poisson link=log solution;
+
+/*Estimating Relative Risk for 0 to 1 Treatment for Black Women*/
+estimate 'Black Women - 1 vs 0 Treatment'  prior_tx_cat 1 0 -1 Race_six_level*prior_tx_cat 1 0 -1 0 0 0 0 0 0 / /*e*/ exp;
+estimate 'Black Women - 2 vs 0 Treatment'  prior_tx_cat 0 1 -1 Race_six_level*prior_tx_cat 0 1 -1 0 0 0 0 0 0 / /*e*/ exp;
+/*Estimating Realtive Risk for 0 to 2 Treatments for White Women*/
+estimate 'White Women - 1 vs 0 Treatment'  prior_tx_cat 1 0 -1 Race_six_level*prior_tx_cat 0 0 0 0 0 0 1 0 -1  / /*e*/ exp;
+estimate 'White Women - 2 vs 0 Treatment'  prior_tx_cat 0 1 -1 Race_six_level*prior_tx_cat 0 0 0 0 0 0 0 1 -1  / /*e*/ exp;
+/*Estimating Realtive Risk for 0 to 2 Treatments for Hispanic*/
+estimate 'Hispanic Women - 1 vs 0 Treatment'  prior_tx_cat 1 0 -1 Race_six_level*prior_tx_cat 0 0 0 1 0 -1  0 0 0 / /*e*/ exp;
+estimate 'Hispanic Women - 2 vs 0 Treatment'  prior_tx_cat 0 1 -1 Race_six_level*prior_tx_cat 0 0 0 0 1 -1  0 0 0 / /*e*/ exp;
+random intercept / subject =SHEPSID type=cs;
+run;
+title;
+
+
