@@ -1,0 +1,33 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: 'Investigating Overtreatment '
+message: 'If you use this software, please cite it as below.'
+type: software
+authors:
+  - given-names: Carolina Hysterectomy Cohort
+    email: whitney.robinson489@duke.edu
+    affiliation: 'Duke University '
+identifiers:
+  - type: url
+    value: >-
+      https://github.com/Carolina-Hysterectomy-Cohort/Investigating-Overtreatment
+    description: 'Public GitHub repository '
+repository-code: >-
+  https://github.com/Carolina-Hysterectomy-Cohort/Investigating-Overtreatment
+abstract: >-
+  This repository includes the documentation and code that
+  created the analytic dataset and performed analysis used
+  to evaluate whether symptom severity can explain higher
+  hysterectomy rates among premenopausal non-Hispanic Black
+  versus White patients in the U.S. South in the paper,
+  "Investigating overtreatment: higher rates of hysterectomy
+  among premenopausal patients in the South."
+keywords:
+  - ' hysterectomy'
+  - electronic health record
+  - 'health equity '
+commit: ' dee15a2'
+version: '1.2'
+date-released: '2023-03-03'
