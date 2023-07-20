@@ -12,4 +12,4 @@ Data abstraction protocol: https://osf.io/fn45c/<br>
 Date codebook: https://osf.io/6qfv5/<br>
 Instrument: https://osf.io/fuwd5/<br>
 
-Citation: Robinson, W. R., Mathias, J.G., Wood, M.E., Anderson, L.G., Howard, A. G., Carey, E.T., Nicholson, W. K., Stürmer, T., Carey, T.S., Myers, E., & Doll, K. M., (2023). Ethnoracial Differences in Premenopausal Hysterectomy: The Role of Symptom Severity. Obstetrics and Gynecology. (In Press).
+Citation: Robinson, Whitney R. PhD, MSPH; Mathias, Joacy G. PhD, MSc; Wood, Mollie E. PhD, MPH; Anderson, Lauren G. MPH; Howard, Annie Green PhD; Carey, Erin T. MD, MSCR; Nicholson, Wanda K. MD, MPH; Carey, Timothy S. MD, MPH; Myers, Evan R. MD, MPH; Stürmer, Til MD, PhD; Doll, Kemi M. MD. Ethnoracial Differences in Premenopausal Hysterectomy: The Role of Symptom Severity. Obstetrics & Gynecology ():10.1097/AOG.0000000000005225, July 6, 2023. | DOI: 10.1097/AOG.0000000000005225
